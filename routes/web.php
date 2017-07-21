@@ -13,18 +13,23 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::resource('/cards', 'CardController');
 
 Route::get('/api/cards', function(){
   return App\Card::with('user')->get();
 })->middleware('auth');
+
+Route::get('/api/card/{id}', function($id){
+  $card = App\Card::with('user')->find($id);
+  return $card;
+})->where('id', '[0-9]+')->middleware('auth');
 
 Route::post('/api/card', function(Request $request){
   $card = new App\Card;

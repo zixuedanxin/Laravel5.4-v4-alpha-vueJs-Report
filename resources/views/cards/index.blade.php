@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{url('/home')}}">Home</a></li>
-      <li class="breadcrumb-item active">cards</li>
+      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+      <li class="breadcrumb-item"><router-link to="/cards">Cards</router-link></li>
     </ol>
-    <add-card v-on:card-added="cardAdded"></add-card>
-    </br>
-    <card-view ref="cardView"></card-view>
+    <transition>
+      <router-view></router-view>
+    </transition>
 </div>
 @endsection

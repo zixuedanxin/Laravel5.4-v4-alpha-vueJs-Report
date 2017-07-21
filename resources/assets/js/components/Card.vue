@@ -4,7 +4,7 @@
       <div class="card-block">
           <h3 class="card-title">{{ card.title }}</h3>
           <p class="card-text">{{ card.description }}</p>
-          <a :href="'cards/' + card.id" class="btn btn-outline-warning">View</a>
+          <router-link class="btn btn-outline-warning" :to="'cards/' + card.id">View</router-link>
           <button class="btn btn-outline-danger" @click="deleteCard">delete</button>
           <button class="btn btn-outline-primary">Export</button>
       </div>

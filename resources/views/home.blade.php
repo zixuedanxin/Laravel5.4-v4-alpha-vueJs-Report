@@ -3,17 +3,11 @@
 @section('content')
 <div class="container">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active">Home</li>
-      <li class="breadcrumb-item"><a href="{{url('/cards')}}">Cards</a></li>
+      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+      <li class="breadcrumb-item"><router-link to="/cards">Cards</router-link></li>
     </ol>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <example></example>
-                </div>
-            </div>
-        </div>
-    </div>
+    <transition>
+      <router-view></router-view>
+    </transition>
 </div>
 @endsection

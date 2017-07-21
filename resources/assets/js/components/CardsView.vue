@@ -40,7 +40,7 @@
 <style>
   .loader{
     margin: 0 auto;
-    width: 8rem;
-    height: 8rem;
+    width: 3rem;
+    height: 3rem;
   }
 </style>
