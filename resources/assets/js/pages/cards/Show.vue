@@ -1,47 +1,46 @@
 <template>
-  <div class="col-md-6" style="margin-top:10px;">
-    <div class="card card-white w-100">
-      <div class="card-block">
-          <h3 class="card-title">{{ card.title }}</h3>
-          <p class="card-text">{{ card.description }}</p>
-          <button class="btn btn-outline-danger" @click="deleteCard">delete</button>
-          <button class="btn btn-outline-primary">Export</button>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <card :card="card" :show="false" v-on:card-deleted="cardDeleted"></card>
+        </div>
       </div>
-      <div class="card-footer">
-        <b>{{ card.user.name }}</b>  <small>{{ card.created_at }}</small>
+      <div class="form-group row">
+        <label for="query-input" class="col-1 col-form-label"><b></b></label>
+        <div class="col-12">
+          <textarea name="query" class="form-control alert alert-warning" type="text" value="" rows="4" cols="80" id="query-input">{{card.query}}</textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-outline-warning" @click="cardRun">run</button>
+          <button class="btn btn-outline-primary" @click="cardSave">save</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <card-table-view :query="card.query" ></card-table-view>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
     export default{
-      data(){
-        return {
-          card: {
-            title: '',
-            description: '',
-            id: 0,
-            user: {
-              name: ''
-            },
-            created_at: ''
+        props:['card'],
+        methods: {
+          cardDeleted(){
+              this.$emit('navigate-to-list');
+          },
+          cardRun(){
+            //this.$refs.cardView.cardAdded(card);
+          },
+          cardSave(){
+
           }
-        };
-      },
-      props: ['id'],
-      created: function(){
-         axios.get('../api/card/'+this.id)
-           .then(response => {
-              this.card = response.data;
-           });
-       },
-       methods: {
-          deleteCard: function () {
-            axios.delete('../api/card/'+this.card.id)
-              .then(response => {
-                  this.$emit('card-deleted',this.card);
-              });
-          }
-       }
+        }
     }
 </script>

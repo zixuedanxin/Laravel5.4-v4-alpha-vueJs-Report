@@ -1,9 +1,11 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-         <img class="loader" src="imgs/preloader.gif" v-show="loading" />
+         <img class="loader" src="../../imgs/preloader.gif" v-show="loading" />
     </div>
-    <card v-for="card in cards" :card="card" v-on:card-deleted="cardDeleted"></card>
+    <div v-for="card in cards" class="col-md-6" style="margin-top:10px;">
+       <card :card="card" :show="true" v-on:card-deleted="cardDeleted"></card>
+    </div>
   </div>
 </template>
 <script>

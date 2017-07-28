@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <img class="loader" src="imgs/preloader.gif" v-show="loading" />
+            <img class="loader" src="../../imgs/preloader.gif" v-show="loading" />
             <button type="button" class="btn btn-secondary" @click="closeAddCard">Close</button>
             <button type="button" class="btn btn-primary" v-if="!loading" @click="saveCard">Save</button>
           </div>

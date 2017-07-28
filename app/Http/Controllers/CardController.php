@@ -58,8 +58,7 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-        //
-        return view('cards/show',['card' => $card]);
+        return view('cards/show',['card' => Card::find($card->id)->with('user')->first()]);
     }
 
     /**
