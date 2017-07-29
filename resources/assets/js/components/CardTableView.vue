@@ -1,21 +1,34 @@
 <template>
-   <div class="row" style="text-align: center;">
+   <div class="row" style="margin: 10px;">
      <div class="col-md-12">
+       <div class="row" style="min-height: 100px;">
+         <div class="col-md-12 text-center">
           <img class="loader" src="../../imgs/preloader.gif" v-show="loading" />
-     </div>
-     <div class="col-md-12">
-        <table class="table table-sm ">
-         <thead>
-           <tr>
-             <th v-for="(column, index) in rows[0]">{{index}}</th>
-           </tr>
-         </thead>
-         <tbody>
-           <tr v-for="row in rows">
-             <td v-for="column in row">{{column}}</td>
-           </tr>
-         </tbody>
-        </table>
+         </div>
+       </div>
+       <div class="row">
+         <div class="col-md-12">
+            <table class="table table-sm table-hover">
+               <thead>
+                 <tr>
+                   <th v-for="(column, index) in rows[0]">{{index}}</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr v-for="row in rows">
+                   <td v-for="column in row">{{column}}</td>
+                 </tr>
+               </tbody>
+            </table>
+         </div>
+       </div>
+       <div class="row">
+         <div class="col-md-12" v-show="errorMessage !=''">
+           <div class="alert alert-danger" role="alert">
+              <strong>Oh snap!</strong> {{errorMessage}}
+            </div>
+         </div>
+       </div>
      </div>
    </div>
 </template>
@@ -29,23 +42,46 @@
     data(){
       return {
         loading: false,
+        errorMessage: '',
         rows: []
       }
     },
     props: ['query'],
     created() {
-      this.getDate();
+      this.run(this.query);
     },
     methods: {
-      getDate: function() {
-          this.loading = true;
-          axios.post('/api/run/query',{query: this.query})
-          .then(wait(3000))
+      run: function(query) {
+          this.showLoader(true);
+          this.rows = [];
+          axios.post('/api/run/query',{query:query})
           .then(response => {
                 this.rows = response.data;
+                this.showLoader(false);
+                this.setError('');
+          }).catch(error => {
                 this.loading = false;
-                console.log(this.rows);
+                this.errorMessage = error.response.data.error_message;
           });
+      },
+      save: function(card){
+        this.showLoader(true);
+        this.rows = [];
+        axios.put('/api/save',{card:card})
+        .then(response => {
+              this.rows = response.data;
+              this.showLoader(false);
+              this.setError('');
+        }).catch(error => {
+              this.showLoader(false);
+              this.setError(error.response.data.error_message);
+        });
+      },
+      showLoader: function(loading){
+        this.loading = loading;
+      },
+      setError: function(errorMessage){
+        this.errorMessage = errorMessage;
       }
     }
   }

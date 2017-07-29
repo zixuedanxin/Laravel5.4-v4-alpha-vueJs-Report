@@ -33,9 +33,14 @@ Route::get('/api/card/{id}', function($id){
 })->where('id', '[0-9]+')->middleware('auth');
 
 // WEB API POST
-Route::any('/api/run/query', function(Request $request){
+Route::post('/api/run/query', function(Request $request){
   if ($request->input('query')) {
-    return DB::select($request->input('query'));
+    try {
+      return DB::select($request->input('query'));
+    } catch(\Illuminate\Database\QueryException $ex){
+      return response(['error_message'=>$ex->getMessage()], 400)
+                 ->header('Content-Type', 'text/plain');
+    }
   }else{
     return [];
   }
@@ -49,6 +54,27 @@ Route::post('/api/card', function(Request $request){
   $card->user_id = Auth::id();
   $card->save();
   return App\Card::with('user')->find($card->id);
+})->middleware('auth');
+
+// WEB API PUT
+Route::put('/api/save', function(Request $request){
+  $card =  App\Card::with('user')->find($request->input('card.id'));
+  $card->title = $request->input('card.title');
+  $card->description = $request->input('card.description');
+  $card->query = $request->input('card.query');
+  $card->user_id = Auth::id();
+  $card->save();
+
+  if ($card->query) {
+    try {
+      return DB::select($card->query);
+    } catch(\Illuminate\Database\QueryException $ex){
+      return response(['error_message'=>$ex->getMessage()], 400)
+                 ->header('Content-Type', 'text/plain');
+    }
+  }else{
+    return [];
+  }
 })->middleware('auth');
 
 // WEB API DELETE

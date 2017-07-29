@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\User;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
@@ -58,7 +59,8 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-        return view('cards/show',['card' => Card::find($card->id)->with('user')->first()]);
+        $card->user = User::find($card->user_id);
+        return view('cards/show',['card' => $card]);
     }
 
     /**

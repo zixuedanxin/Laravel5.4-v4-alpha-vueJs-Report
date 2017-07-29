@@ -61,7 +61,7 @@ const app = new Vue({
     el: '#app',
     methods: {
       navigateToCardslist: function(){
-        router.go(-1);
+        router.push('/cards')
       }
     }
 });
