@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-12">
-          <card :card="card" :show="false" v-on:card-deleted="cardDeleted"></card>
+          <card :card="card" :show="false" :edit="true" v-on:card-deleted="cardDeleted"></card>
         </div>
       </div>
       <div class="form-group row">

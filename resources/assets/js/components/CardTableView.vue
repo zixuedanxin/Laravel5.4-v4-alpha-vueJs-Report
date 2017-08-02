@@ -1,14 +1,14 @@
 <template>
-   <div class="row" style="margin: 10px;">
+   <div class="row" style="margin-top: 10px;">
      <div class="col-md-12">
-       <div class="row" style="min-height: 100px;">
+       <div class="row" style="min-height: 100px;" v-show="loading">
          <div class="col-md-12 text-center">
-          <img class="loader" src="../../imgs/preloader.gif" v-show="loading" />
+          <img class="loader" src="../../imgs/preloader.gif" />
          </div>
        </div>
-       <div class="row">
+       <div class="row" id="card-table">
          <div class="col-md-12">
-            <table class="table table-sm table-hover">
+            <table class="table table-sm table-hover" id="example">
                <thead>
                  <tr>
                    <th v-for="(column, index) in rows[0]">{{index}}</th>
@@ -59,6 +59,14 @@
                 this.rows = response.data;
                 this.showLoader(false);
                 this.setError('');
+
+                setTimeout(function(){
+                //$('#example').DataTable();
+                $('#example').DataTable( {
+                     lengthChange: false,
+                     buttons: [ 'copy', 'excel', 'pdf']
+                 } );
+                }, 100);
           }).catch(error => {
                 this.loading = false;
                 this.errorMessage = error.response.data.error_message;
@@ -91,5 +99,14 @@
     margin: 0 auto;
     width: 3rem;
     height: 3rem;
+  }
+  #card-table{
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background: #fcf8e3;
+    border: 1px #faf2cc solid;
+    border-radius: 5px;
   }
 </style>

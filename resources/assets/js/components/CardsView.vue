@@ -4,7 +4,7 @@
          <img class="loader" src="../../imgs/preloader.gif" v-show="loading" />
     </div>
     <div v-for="card in cards" class="col-md-6" style="margin-top:10px;">
-       <card :card="card" :show="true" v-on:card-deleted="cardDeleted"></card>
+       <card :card="card" :show="true"  :edit="false" v-on:card-deleted="cardDeleted"></card>
     </div>
   </div>
 </template>
