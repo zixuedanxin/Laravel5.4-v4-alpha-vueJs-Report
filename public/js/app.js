@@ -127447,20 +127447,13 @@ function wait(ms) {
       var _this = this;
 
       this.showLoader(true);
-      this.rows = [];
-      $('#example').DataTable().clear().destroy();
+      this.updatingTable();
       axios.post('/api/run/query', { query: query }).then(function (response) {
         _this.rows = response.data;
         _this.showLoader(false);
         _this.setError('');
-        setTimeout(function () {
-          $('#example').DataTable({
-            lengthChange: false,
-            buttons: ['copy', 'excel', 'pdf']
-          }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
-        }, 100);
+        _this.updatedTable();
       }).catch(function (error) {
-        console.log('ARCHER: ERROR');
         _this.loading = false;
         _this.errorMessage = error.response.data.error_message;
       });
@@ -127469,18 +127462,12 @@ function wait(ms) {
       var _this2 = this;
 
       this.showLoader(true);
-      this.rows = [];
-      $('#example').DataTable().clear().destroy();
+      this.updatingTable();
       axios.put('/api/save', { card: card }).then(function (response) {
         _this2.rows = response.data;
         _this2.showLoader(false);
         _this2.setError('');
-        setTimeout(function () {
-          $('#example').DataTable({
-            lengthChange: false,
-            buttons: ['copy', 'excel', 'pdf']
-          }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
-        }, 100);
+        _this2.updatedTable();
       }).catch(function (error) {
         _this2.showLoader(false);
         _this2.setError(error.response.data.error_message);
@@ -127491,6 +127478,23 @@ function wait(ms) {
     },
     setError: function setError(errorMessage) {
       this.errorMessage = errorMessage;
+    },
+    updatingTable: function updatingTable() {
+      if (this.rows.length != 0) {
+        this.row = [];
+        $(this.$refs.cardTableView).dataTable().fnDestroy();
+      }
+    },
+    updatedTable: function updatedTable() {
+      if (this.rows.length != 0) {
+        var self = this;
+        setTimeout(function () {
+          $(self.$refs.cardTableView).DataTable({
+            lengthChange: true,
+            buttons: ['copy', 'excel', 'pdf']
+          }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+        }, 100);
+      }
     }
   }
 });
@@ -127526,9 +127530,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-md-12"
   }, [_c('table', {
+    ref: "cardTableView",
     staticClass: "table table-striped table-bordered",
     attrs: {
-      "id": "example"
+      "id": "cardTableView"
     }
   }, [_c('thead', [_c('tr', _vm._l((_vm.rows[0]), function(column, index) {
     return _c('th', [_vm._v(_vm._s(index))])

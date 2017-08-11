@@ -8,7 +8,7 @@
        </div>
        <div class="row" id="card-table">
          <div class="col-md-12">
-            <table class="table table-striped table-bordered" id="example">
+            <table class="table table-striped table-bordered" id="cardTableView" ref="cardTableView">
                <thead>
                  <tr>
                    <th v-for="(column, index) in rows[0]">{{index}}</th>
@@ -53,42 +53,27 @@
     methods: {
       run: function(query) {
           this.showLoader(true);
-          this.rows = [];
-          $('#example').DataTable().clear().destroy();
+          this.updatingTable();
           axios.post('/api/run/query',{query:query})
           .then(response => {
                 this.rows = response.data;
                 this.showLoader(false);
                 this.setError('');
-                setTimeout(function(){
-                  $('#example').DataTable({
-                    lengthChange: false,
-                    buttons: [ 'copy', 'excel', 'pdf']
-                  }
-                  ).buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
-                }, 100);
+                this.updatedTable();
           }).catch(error => {
-                console.log('ARCHER: ERROR');
                 this.loading = false;
                 this.errorMessage = error.response.data.error_message;
           });
       },
       save: function(card){
         this.showLoader(true);
-        this.rows = [];
-        $('#example').DataTable().clear().destroy();
+        this.updatingTable();
         axios.put('/api/save',{card:card})
         .then(response => {
               this.rows = response.data;
               this.showLoader(false);
               this.setError('');
-              setTimeout(function(){
-                $('#example').DataTable({
-                  lengthChange: false,
-                  buttons: [ 'copy', 'excel', 'pdf']
-                }
-                ).buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
-              }, 100);
+              this.updatedTable();
         }).catch(error => {
               this.showLoader(false);
               this.setError(error.response.data.error_message);
@@ -99,6 +84,24 @@
       },
       setError: function(errorMessage){
         this.errorMessage = errorMessage;
+      },
+      updatingTable: function(){
+        if (this.rows.length != 0) {
+          this.row = [];
+          $(this.$refs.cardTableView).dataTable().fnDestroy();
+        }
+      },
+      updatedTable: function(){
+        if (this.rows.length != 0) {
+          var self = this;
+          setTimeout(function(){
+            $(self.$refs.cardTableView).DataTable({
+              lengthChange: true,
+              buttons: [ 'copy', 'excel', 'pdf']
+            }
+            ).buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
+          }, 100);
+        }
       }
     }
   }
