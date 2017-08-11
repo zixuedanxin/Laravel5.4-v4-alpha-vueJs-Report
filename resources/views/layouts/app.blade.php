@@ -15,7 +15,6 @@
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
       <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary  fixed-top">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -57,8 +56,11 @@
           </ul>
         </div>
       </nav>
-
-    @yield('content')
+      <div id="app" class="container">
+        <div class="col-12">
+          @yield('content')
+        </div>
+      </div>
 
     </div>
     <!-- Scripts -->

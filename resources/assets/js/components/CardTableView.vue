@@ -8,7 +8,7 @@
        </div>
        <div class="row" id="card-table">
          <div class="col-md-12">
-            <table class="table table-sm table-hover" id="example">
+            <table class="table table-striped table-bordered" id="example">
                <thead>
                  <tr>
                    <th v-for="(column, index) in rows[0]">{{index}}</th>
@@ -54,20 +54,21 @@
       run: function(query) {
           this.showLoader(true);
           this.rows = [];
+          $('#example').DataTable().clear().destroy();
           axios.post('/api/run/query',{query:query})
           .then(response => {
                 this.rows = response.data;
                 this.showLoader(false);
                 this.setError('');
-
                 setTimeout(function(){
-                //$('#example').DataTable();
-                $('#example').DataTable( {
-                     lengthChange: false,
-                     buttons: [ 'copy', 'excel', 'pdf']
-                 } );
+                  $('#example').DataTable({
+                    lengthChange: false,
+                    buttons: [ 'copy', 'excel', 'pdf']
+                  }
+                  ).buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
                 }, 100);
           }).catch(error => {
+                console.log('ARCHER: ERROR');
                 this.loading = false;
                 this.errorMessage = error.response.data.error_message;
           });
@@ -75,11 +76,19 @@
       save: function(card){
         this.showLoader(true);
         this.rows = [];
+        $('#example').DataTable().clear().destroy();
         axios.put('/api/save',{card:card})
         .then(response => {
               this.rows = response.data;
               this.showLoader(false);
               this.setError('');
+              setTimeout(function(){
+                $('#example').DataTable({
+                  lengthChange: false,
+                  buttons: [ 'copy', 'excel', 'pdf']
+                }
+                ).buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
+              }, 100);
         }).catch(error => {
               this.showLoader(false);
               this.setError(error.response.data.error_message);

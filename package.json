@@ -18,9 +18,10 @@
     "datatables.net-buttons-bs": "^1.2.1",
     "cross-env": "^5.0.1",
     "gulp": "^3.9.1",
-    "jquery": "^3.1.1",
+    "jquery": "^1.12.4",
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10"
+    "vue": "^2.1.10",
+    "pdfmake": "^0.1.32"
   }
 }

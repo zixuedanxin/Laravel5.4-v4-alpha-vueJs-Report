@@ -9,8 +9,16 @@ window._ = require('lodash');
 
 try {
     window.$ = window.jQuery = require('jquery');
-    require('datatables.net-bs');
+    require('datatables.net');
+    require('datatables.net-bs4');
+    require('datatables.net-buttons');
+    require('datatables.net-buttons-bs4');
+    window.Tether = require('tether');
     require('bootstrap');
+    require('jszip');
+    require('pdfmake');
+    require( 'datatables.net-buttons' )( window, $ );
+
 } catch (e) {
   console.log(e);
 }

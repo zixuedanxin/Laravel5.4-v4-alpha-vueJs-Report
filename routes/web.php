@@ -36,7 +36,7 @@ Route::get('/api/card/{id}', function($id){
 Route::post('/api/run/query', function(Request $request){
   if ($request->input('query')) {
     try {
-      return DB::select($request->input('query'));
+      return DB::connection('reports')->select($request->input('query'));
     } catch(\Illuminate\Database\QueryException $ex){
       return response(['error_message'=>$ex->getMessage()], 400)
                  ->header('Content-Type', 'text/plain');
@@ -67,7 +67,7 @@ Route::put('/api/save', function(Request $request){
 
   if ($card->query) {
     try {
-      return DB::select($card->query);
+      return DB::connection('reports')->select($card->query);
     } catch(\Illuminate\Database\QueryException $ex){
       return response(['error_message'=>$ex->getMessage()], 400)
                  ->header('Content-Type', 'text/plain');
