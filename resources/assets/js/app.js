@@ -60,8 +60,12 @@ const app = new Vue({
     router: router,
     el: '#app',
     methods: {
-      navigateToCardslist: function(){
-        router.push('/cards')
+      navigateToCardslist: function(force){
+        if (force) {
+          location.replace('/cards');
+        }else{
+          router.push('/cards');
+        }
       }
     }
 });

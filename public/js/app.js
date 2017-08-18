@@ -61319,8 +61319,12 @@ var app = new Vue({
   router: router,
   el: '#app',
   methods: {
-    navigateToCardslist: function navigateToCardslist() {
-      router.push('/cards');
+    navigateToCardslist: function navigateToCardslist(force) {
+      if (force) {
+        location.replace('/cards');
+      } else {
+        router.push('/cards');
+      }
     }
   }
 });
