@@ -57,9 +57,7 @@
         </div>
       </nav>
       <div id="app" class="container">
-        <div class="col-12">
           @yield('content')
-        </div>
       </div>
 
     </div>

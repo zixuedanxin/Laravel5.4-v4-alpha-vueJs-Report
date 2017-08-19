@@ -13,12 +13,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-9">
+        <div class="col-lg-8 col-md-7 col-sm-2">
         </div>
-        <div class="col-1 text-right">
+        <div class="col-lg-2 col-md-2 col-sm-4 text-right">
           <button class="btn btn-outline-warning" @click="cardRun" >Run</button>
         </div>
-        <div class="col-2 text-right">
+        <div class="col-lg-2 col-md-2 col-sm-4 text-right">
           <button class="btn btn-outline-primary" @click="cardSave">Run and Save</button>
         </div>
       </div>

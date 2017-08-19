@@ -23,6 +23,9 @@ Vue.component('card-view', require('./components/CardsView.vue'));
 Vue.component('add-card', require('./components/AddCard.vue'));
 Vue.component('card-table-view', require('./components/CardTableView.vue'));
 
+// Charts
+Vue.component('card-liner-chart', require('./components/charts/Liner.vue'));
+
 // Pages
 Vue.component('card-show', require('./pages/cards/Show.vue'));
 

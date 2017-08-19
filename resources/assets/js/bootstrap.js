@@ -18,7 +18,7 @@ try {
     require('jszip');
     require('pdfmake');
     require( 'datatables.net-buttons' )( window, $ );
-
+    require('vue-chartjs');
 } catch (e) {
   console.log(e);
 }
