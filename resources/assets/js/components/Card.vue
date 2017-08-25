@@ -1,6 +1,6 @@
 <template>
     <div class="card card-white w-100" id="card-view">
-      <div class="card-block">
+      <div class="card-body">
           <h3 class="card-title"><input class="form-control"  type="text" v-model="card.title" :disabled="edit != true || loading == true"/></h3>
           <p class="card-text"><input class="form-control"  type="text" v-model="card.description" :disabled="edit != true || loading == true"/></p>
           <a class="btn btn-outline-warning" :href="'cards/' + card.id" v-show="show">View</a>

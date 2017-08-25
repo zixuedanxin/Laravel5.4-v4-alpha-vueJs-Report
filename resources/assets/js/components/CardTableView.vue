@@ -25,7 +25,7 @@
             </div>
 
             <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-              <div class="card-block">
+              <div class="card-body">
                 <div class="row" id="card-table">
                   <div class="col-md-12">
                      <table class="table table-striped table-bordered" id="cardTableView" ref="cardTableView">
@@ -54,7 +54,7 @@
               </h5>
             </div>
             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-              <div class="card-block">
+              <div class="card-body">
                 <card-liner-chart ref="chart"  />
               </div>
             </div>
@@ -90,7 +90,7 @@
           datasets: [
             {
               label: 'Chart',
-              backgroundColor: '#3097d1',
+              backgroundColor: '#007bff',
               data: this.rows.map(function(x){
                 return x.chart_h;
               })

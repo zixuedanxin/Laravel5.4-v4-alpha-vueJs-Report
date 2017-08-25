@@ -13,11 +13,11 @@ try {
     require('datatables.net-bs4');
     require('datatables.net-buttons');
     require('datatables.net-buttons-bs4');
-    window.Tether = require('tether');
+    window.Popper = require('popper.js').default;
     require('bootstrap');
     require('jszip');
     require('pdfmake');
-    require( 'datatables.net-buttons' )( window, $ );
+    require('datatables.net-buttons')( window, $ );
     require('vue-chartjs');
 } catch (e) {
   console.log(e);
