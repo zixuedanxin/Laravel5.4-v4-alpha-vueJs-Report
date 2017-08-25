@@ -69,6 +69,7 @@
        return new Promise(resolve => setTimeout(() => resolve(x), ms));
      };
   }
+  import randomColor from 'randomcolor';
   export default{
     data(){
       return {
@@ -84,22 +85,31 @@
     computed: {
       chartData: function () {
         return {
-          labels:this.rows.map(function(x){
-            return x.chart_v;
+          labels: this.rows.map(function(x){
+            return x[Object.keys(x)[0]];
           }),
-          datasets: [
-            {
-              label: 'Chart',
-              backgroundColor: '#007bff',
-              data: this.rows.map(function(x){
-                return x.chart_h;
-              })
-            }
-          ]
+          datasets: this.datasets
         };
       },
+      datasets: function () {
+          var data = [];
+          for (var i = 1; i < Object.keys(this.rows[0]).length; i++) {
+            data[i-1] ={
+              label: Object.keys(this.rows[0])[i],
+              backgroundColor: randomColor({
+                 luminosity: 'random',
+                 seed: i,
+                 hue: 'random'
+              }),
+              data: this.rows.map(function(x){
+                return x[Object.keys(x)[i]];
+              })
+            };
+          }
+          return data;
+      },
       showChart: function() {
-        return this.rows.length !=0 && this.rows[0].chart_h !== undefined && this.rows[0].chart_v !== undefined;
+        return this.rows.length !=0 && this.rows[0] !== undefined && Object.keys(this.rows[0]).length >1;
       }
     },
     methods: {
