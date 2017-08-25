@@ -6,7 +6,6 @@
           <a class="btn btn-outline-warning" :href="'cards/' + card.id" v-show="show">View</a>
           <button class="btn btn-outline-warning" v-show="edit == true" @click="saveCard">Save</button>
           <button class="btn btn-outline-danger" @click="deleteCard">delete</button>
-          <button class="btn btn-outline-primary">Export</button>
           <img class="loader" src="../../imgs/preloader.gif" v-show="loading" />
       </div>
       <div class="card-footer">

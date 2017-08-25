@@ -147,11 +147,13 @@
         if (this.rows.length != 0) {
           var self = this;
           setTimeout(function(){
-            $(self.$refs.cardTableView).DataTable({
-              lengthChange: true,
-              buttons: [ 'copy', 'excel', 'pdf']
-            }
-            ).buttons().container().appendTo( '#example_wrapper .col-md-6:eq(0)' );
+          var table =  $(self.$refs.cardTableView).DataTable({
+              lengthChange: false,
+        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+    } );
+
+    table.buttons().container()
+        .appendTo( '#cardTableView_wrapper .col-md-6:eq(0)' );
           }, 100);
 
           // Update Chart
