@@ -1,9 +1,6 @@
 # SQL Report View/Export
 Build with Laravel 5.4, Vue.js, Bootstrap 4 (Beta), DataTable.
 
-![cards](public/images/cards.png)
-
-![cardView](public/images/card_view.png)
 ### Why
 
 - I am getting started with Vue.js, webpack.
