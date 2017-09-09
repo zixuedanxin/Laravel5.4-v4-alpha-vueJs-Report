@@ -13,6 +13,7 @@
   </div>
 </template>
 <script>
+    import randomColor from 'randomcolor';
     export default{
       data(){
         return {
@@ -64,8 +65,21 @@
             for (var i = 1; i < Object.keys(this.rows[0]).length; i++) {
               data[i-1] ={
                 label: Object.keys(this.rows[0])[i],
-                backgroundColor: '#007bff',
-                fill: false,
+                backgroundColor: randomColor({
+                   luminosity: 'light',
+                   hue: 'random',
+                   format: 'rgb',
+                   seed: i + this.id + 40,
+                   alpha: 0.5
+                }),
+                borderColor: randomColor({
+                   luminosity: 'random',
+                   hue: 'random',
+                   seed: i + this.id + 40,
+                }),
+                borderWidth: 1,
+                pointRadius: 5,
+                pointBorderColor: 'rgb(0, 0, 0)',
                 data: this.rows.map(function(x){
                   return x[Object.keys(x)[i]];
                 })
