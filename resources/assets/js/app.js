@@ -22,8 +22,10 @@ Vue.component('card', require('./components/Card.vue'));
 Vue.component('card-view', require('./components/CardsView.vue'));
 Vue.component('add-card', require('./components/AddCard.vue'));
 Vue.component('card-table-view', require('./components/CardTableView.vue'));
+Vue.component('card-chart-view', require('./components/CardChart.vue'));
 
 // Charts
+Vue.component('card-bar-chart', require('./components/charts/Bar.vue'));
 Vue.component('card-liner-chart', require('./components/charts/Liner.vue'));
 
 // Pages

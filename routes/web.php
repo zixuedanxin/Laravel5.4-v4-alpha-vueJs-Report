@@ -32,6 +32,20 @@ Route::get('/api/card/{id}', function($id){
   return $card;
 })->where('id', '[0-9]+')->middleware('auth');
 
+Route::get('/api/card/run/{id}', function($id){
+  if ($id) {
+    try {
+      $card = App\Card::with('user')->find($id);
+      return DB::connection('reports')->select($card->query);
+    } catch(\Illuminate\Database\QueryException $ex){
+      return response(['error_message'=>$ex->getMessage()], 400)
+                 ->header('Content-Type', 'text/plain');
+    }
+  }else{
+    return [];
+  }
+})->middleware('auth');
+
 // WEB API POST
 Route::post('/api/run/query', function(Request $request){
   if ($request->input('query')) {

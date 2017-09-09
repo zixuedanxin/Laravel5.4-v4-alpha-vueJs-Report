@@ -1,9 +1,12 @@
 <script>
-import { Bar } from 'vue-chartjs'
-export default Bar.extend({
+import { Line } from 'vue-chartjs'
+export default Line.extend({
   methods: {
-    updateChart: function(data) {
-      this.renderChart(data);
+    updateChart: function(data,text) {
+      this.renderChart(data,{responsive: true,maintainAspectRatio: false, title: {
+					display: true,
+					text: text,
+				}});
     }
   }
 });
