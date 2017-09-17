@@ -55,7 +55,7 @@
             </div>
             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
               <div class="card-body">
-                <card-liner-chart ref="chart"  />
+                <card-bar-chart ref="chart" :styles="{height: 300,width: '100%', position: 'relative'}" />
               </div>
             </div>
           </div>
