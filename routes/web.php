@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 Route::resource('/cards', 'CardController');
 Route::get('/', 'HomeController@index')->name('home');
