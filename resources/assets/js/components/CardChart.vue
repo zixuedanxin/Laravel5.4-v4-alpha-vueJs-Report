@@ -62,25 +62,25 @@
         },
         datasets: function () {
             var data = [];
+            var colorsHue = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink' , 'monochrome'];
             for (var i = 1; i < Object.keys(this.rows[0]).length; i++) {
+              var color = randomColor({
+                 luminosity: 'dark',
+                 hue: colorsHue[i],
+                 format: 'rgb',
+              });
               data[i-1] ={
                 label: Object.keys(this.rows[0])[i],
-                backgroundColor: randomColor({
-                   luminosity: 'light',
-                   hue: 'random',
-                   format: 'rgb',
-                   seed: i + this.id + 40,
-                   alpha: 0.5
-                }),
-                borderColor: randomColor({
-                   luminosity: 'random',
-                   hue: 'random',
-                   seed: i + this.id + 40,
-                }),
-                borderWidth: 1,
+                backgroundColor: color,
+                borderColor: color,
+                borderWidth: 2,
                 pointRadius: 5,
-                pointBorderColor: 'rgb(0, 0, 0)',
+                fill: false,
+                pointBorderColor: color,
                 data: this.rows.map(function(x){
+                  if (x[Object.keys(x)[i]] == null) {
+                    return 0;
+                  }
                   return x[Object.keys(x)[i]];
                 })
               };

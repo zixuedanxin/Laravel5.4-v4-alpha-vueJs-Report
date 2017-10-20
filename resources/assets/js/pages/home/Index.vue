@@ -3,8 +3,8 @@
     <div class="col-md-12">
          <img class="loader" src="../../../imgs/preloader.gif" v-show="loading" />
     </div>
-    <div v-for="card in cards" class="col-md-6" style="margin-top:10px;">
-          <card-chart-view :id="card.id" :description="card.description" :height="300"></card-chart-view>
+    <div v-for="card in cards" class="col-md-12" style="margin-top:10px;">
+          <card-chart-view :id="card.id" :description="card.description" :height="500"></card-chart-view>
     </div>
   </div>
 </template>

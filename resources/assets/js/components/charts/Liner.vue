@@ -5,6 +5,7 @@ export default Line.extend({
     updateChart: function(data,text) {
       this.renderChart(data,{
             responsive: true,
+            stacked: true,
             maintainAspectRatio: false,
             title: {
     					display: true,
@@ -18,20 +19,12 @@ export default Line.extend({
             scales: {
               xAxes: [{
                   display: true,
-                  scaleLabel: {
-                      display: true,
-                      labelString: 'Month'
-                  },
                   gridLines: {
                     display: true
                   }
               }],
               yAxes: [{
                   display: true,
-                  scaleLabel: {
-                      display: true,
-                      labelString: 'Value'
-                  },
                   ticks: {
                     beginAtZero:true
                   },
